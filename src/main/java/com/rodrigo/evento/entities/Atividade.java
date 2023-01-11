@@ -13,6 +13,7 @@ public class Atividade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    @Column(columnDefinition = "TEXT")
     private String descricao;
     private Double preco;
 
@@ -20,21 +21,17 @@ public class Atividade {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToOne
-    @MapsId
-    private Bloco bloco;
     @OneToMany(mappedBy = "atividade")
     private List<Bloco> blocos = new ArrayList<>();
 
     public Atividade(){
     }
-    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria, Bloco bloco) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.categoria = categoria;
-        this.bloco = bloco;
     }
 
     public Integer getId() {
